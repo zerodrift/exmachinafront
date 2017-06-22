@@ -5,7 +5,7 @@ declare var $:any;
 var sidebarTimer: any;
 
 @Component({
-    moduleId: module.id,
+    moduleId: 'module.id',
     selector: 'sidebar-cmp',
     templateUrl: 'sidebar.component.html',
 })

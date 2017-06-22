@@ -49,7 +49,7 @@ var SidebarComponent = (function () {
 }());
 SidebarComponent = __decorate([
     core_1.Component({
-        moduleId: module.id,
+        moduleId: 'module.id',
         selector: 'sidebar-cmp',
         templateUrl: 'sidebar.component.html',
     })

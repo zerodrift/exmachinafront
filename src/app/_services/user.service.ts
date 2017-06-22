@@ -18,8 +18,18 @@ export class UserService {
         return this.http.get(this.host + '/api/users/' + id, this.jwt()).map((response: Response) => response.json());
     }
 
+    getUser(login:string) {
+        return this.http.get(AppSettings.FETCH_USER_LOGIN_ENDPOINT + login).map( response => response.json());
+    }
+
     create(user: User) {
-        return this.http.post(this.host + '/api/users', user, this.jwt()).map((response: Response) => response.json());
+        return this.http.post(this.host + '/api/users', {
+            "id":0,
+            "login":user.login,
+        "password":user.password,
+        "firstname": user.firstname,
+        "lastname": user.lastname,
+        "email": user.email}, this.jwt()).map((response: Response) => response.json());
     }
 
     update(user: User) {
@@ -35,9 +45,11 @@ export class UserService {
     private jwt() {
         // create authorization header with jwt token
         let currentUser: string = localStorage.getItem('currentUser');
+        console.log("current user is: " + JSON.stringify(currentUser));
         let tokenKey = AppSettings.API_TOKEN_KEY;
         return { headers: new Headers({
                 'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin' : 'http://localhost:8080',
                 [tokenKey]: currentUser //square braces to reference a variable in json
             })};
     }

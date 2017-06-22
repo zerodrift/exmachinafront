@@ -4,4 +4,6 @@
     password: string;
     firstname: string;
     lastname: string;
+    email: string;
+    role: number;
 }

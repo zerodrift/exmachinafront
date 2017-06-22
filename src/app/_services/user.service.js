@@ -23,8 +23,18 @@ var UserService = (function () {
     UserService.prototype.getById = function (id) {
         return this.http.get(this.host + '/api/users/' + id, this.jwt()).map(function (response) { return response.json(); });
     };
+    UserService.prototype.getUser = function (login) {
+        return this.http.get(app_settings_1.AppSettings.FETCH_USER_LOGIN_ENDPOINT + login).map(function (response) { return response.json(); });
+    };
     UserService.prototype.create = function (user) {
-        return this.http.post(this.host + '/api/users', user, this.jwt()).map(function (response) { return response.json(); });
+        return this.http.post(this.host + '/api/users', {
+            "id": 0,
+            "login": user.login,
+            "password": user.password,
+            "firstname": user.firstname,
+            "lastname": user.lastname,
+            "email": user.email
+        }, this.jwt()).map(function (response) { return response.json(); });
     };
     UserService.prototype.update = function (user) {
         return this.http.put(this.host + '/api/users/' + user.id, user, this.jwt()).map(function (response) { return response.json(); });
@@ -36,9 +46,11 @@ var UserService = (function () {
     UserService.prototype.jwt = function () {
         // create authorization header with jwt token
         var currentUser = localStorage.getItem('currentUser');
+        console.log("current user is: " + JSON.stringify(currentUser));
         var tokenKey = app_settings_1.AppSettings.API_TOKEN_KEY;
         return { headers: new http_1.Headers((_a = {
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': 'http://localhost:8080'
                 },
                 _a[tokenKey] = currentUser //square braces to reference a variable in json
             ,

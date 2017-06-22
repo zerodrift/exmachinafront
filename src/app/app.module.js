@@ -23,6 +23,11 @@ var index_4 = require("./home/index");
 var index_5 = require("./login/index");
 var index_6 = require("./register/index");
 var material_module_1 = require("./material.module");
+var admin_layout_component_1 = require("./admin/admin-layout.component");
+var sidebar_module_1 = require("./sidebar/sidebar.module");
+var navbar_component_1 = require("./shared/navbar/navbar.component");
+var footer_component_1 = require("./shared/footer/footer.component");
+var registration_async_validator_1 = require("./register/registration-async.validator");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -35,14 +40,20 @@ AppModule = __decorate([
             forms_1.FormsModule,
             http_1.HttpModule,
             app_routing_1.routing,
-            material_module_1.MyMaterialModule
+            material_module_1.MyMaterialModule,
+            sidebar_module_1.SidebarModule,
+            forms_1.ReactiveFormsModule
         ],
         declarations: [
             app_component_1.AppComponent,
             index_1.AlertComponent,
             index_4.HomeComponent,
             index_5.LoginComponent,
-            index_6.RegisterComponent
+            index_6.RegisterComponent,
+            admin_layout_component_1.AdminLayoutComponent,
+            navbar_component_1.NavbarComponent,
+            footer_component_1.FooterComponent,
+            registration_async_validator_1.default
         ],
         providers: [
             index_2.AuthGuard,

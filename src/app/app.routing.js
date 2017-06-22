@@ -11,41 +11,7 @@ var appRoutes = [
     {
         path: '',
         component: admin_layout_component_1.AdminLayoutComponent,
-        children: [
-            {
-                path: '',
-                loadChildren: './dashboard/dashboard.module#DashboardModule'
-            }, {
-                path: 'components',
-                loadChildren: './components/components.module#ComponentsModule'
-            }, {
-                path: 'forms',
-                loadChildren: './forms/forms.module#Forms'
-            },
-            // {
-            //     path: 'tables',
-            //     loadChildren: './tables/tables.module#TablesModule'
-            // },
-            {
-                path: 'maps',
-                loadChildren: './maps/maps.module#MapsModule'
-            }, {
-                path: 'widgets',
-                loadChildren: './widgets/widgets.module#WidgetsModule'
-            }, {
-                path: 'charts',
-                loadChildren: './charts/charts.module#ChartsModule'
-            }, {
-                path: 'calendar',
-                loadChildren: './calendar/calendar.module#CalendarModule'
-            }, {
-                path: '',
-                loadChildren: './userpage/user.module#UserModule'
-            }, {
-                path: '',
-                loadChildren: './timeline/timeline.module#TimelineModule'
-            }
-        ]
+        children: []
     },
     { path: 'login', component: index_2.LoginComponent },
     { path: 'register', component: index_3.RegisterComponent },

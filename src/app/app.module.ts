@@ -1,6 +1,6 @@
 ﻿import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
+import {FormsModule, ReactiveFormsModule}    from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 // used to create fake backend
@@ -18,6 +18,11 @@ import { HomeComponent } from './home/index';
 import { LoginComponent } from './login/index';
 import { RegisterComponent } from './register/index';
 import {MyMaterialModule} from "./material.module";
+import {AdminLayoutComponent} from "./admin/admin-layout.component";
+import {SidebarModule} from "./sidebar/sidebar.module";
+import {NavbarComponent} from "./shared/navbar/navbar.component";
+import {FooterComponent} from "./shared/footer/footer.component";
+import AsyncValidator from "./register/registration-async.validator";
 
 
 @NgModule({
@@ -26,7 +31,9 @@ import {MyMaterialModule} from "./material.module";
         FormsModule,
         HttpModule,
         routing,
-        MyMaterialModule
+        MyMaterialModule,
+        SidebarModule,
+        ReactiveFormsModule
 
 ],
     declarations: [
@@ -34,7 +41,11 @@ import {MyMaterialModule} from "./material.module";
         AlertComponent,
         HomeComponent,
         LoginComponent,
-        RegisterComponent
+        RegisterComponent,
+        AdminLayoutComponent,
+        NavbarComponent,
+        FooterComponent,
+        AsyncValidator
     ],
     providers: [
         AuthGuard,

@@ -4,15 +4,14 @@
       <tbody>
           <tr *ngFor="let row of data.dataRows">
             <!-- <td *ngFor="let cell of row">{{ cell }}</td> -->
-            <td>
-                <div class="flag">
-                    <img src="../../../assets/img/flags/{{row[0]}}.png" alt="">
-                </div>
-            </td>
-            <td>
-                {{row[1]}}
-            </td>
-            <td class="text-right">
+              <td>
+                  <div class="flag">
+                      <!--<img src="../../../assets/img/flags/{{row[0]}}.png" alt="">-->
+                  </div>
+
+                  {{row[1]}}
+              </td>
+              <td class="text-right">
                 {{row[2]}}
             </td>
             <td class="text-right">
