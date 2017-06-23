@@ -23,8 +23,11 @@ var UserService = (function () {
     UserService.prototype.getById = function (id) {
         return this.http.get(this.host + '/api/users/' + id, this.jwt()).map(function (response) { return response.json(); });
     };
-    UserService.prototype.getUser = function (login) {
+    UserService.prototype.getUserByLogin = function (login) {
         return this.http.get(app_settings_1.AppSettings.FETCH_USER_LOGIN_ENDPOINT + login).map(function (response) { return response.json(); });
+    };
+    UserService.prototype.getUserByEmail = function (email) {
+        return this.http.get(app_settings_1.AppSettings.FETCH_USER_EMAIL_ENDPOINT + email).map(function (response) { return response.json(); });
     };
     UserService.prototype.create = function (user) {
         return this.http.post(this.host + '/api/users', {

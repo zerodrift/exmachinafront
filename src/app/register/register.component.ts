@@ -4,15 +4,14 @@ import { Router } from '@angular/router';
 
 import { AlertService, UserService } from '../_services/index';
 import {User} from "../_models/user";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import RegistrationValidator from "./registration-async.validator";
-import { cachingAsyncValidatorFactory } from './asyncvalidator.factory';
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+// import RegistrationValidator from "./registration-login-async.validator";
 
 @Component({
     moduleId: module.id.toString(),
     selector: 'register-cmp',
     templateUrl: 'register.component.html',
-    providers: [RegistrationValidator]
+    // providers: [RegistrationValidator]
 })
 
 
@@ -26,81 +25,56 @@ export class RegisterComponent implements OnInit {
         private router: Router,
         private userService: UserService,
         private alertService: AlertService,
-        public fb: FormBuilder,
-        private validator: RegistrationValidator) {
+        public fb: FormBuilder) {
+        this.model = new User();
 
     }
 
     ngOnInit(){
         //called after the constructor and called  after the first ngOnChanges()
+        this.model = new User();//any = {};
         this.signUpForm = this.fb.group({
-            firstName: [this.model.firstname, Validators.required],
-            lastName: [this.model.lastname, Validators.required],
-            login: [this.model.login, Validators.required],//, validator.checkUsername],
-            // 'email': [this.model.email, [Validators.required, cachingAsyncValidatorFactory((value) =>
-            //     this.userService.getUser(value).map((valid: string) => valid ))]],
-            email: [this.model.email, [Validators.required, this.validator.emailAvailability]],
+            firstname: [this.model.firstname, Validators.compose([Validators.required, Validators.maxLength(50)])],
+            lastname: [this.model.lastname, Validators.compose([Validators.required, Validators.maxLength(50)])],
+            login: [this.model.login, [Validators.required]],
+            email: [this.model.email, Validators.compose([Validators.required, Validators.email])],
             password: [this.model.email, Validators.required]
         });
-
-        this.signUpForm.valueChanges
-            .subscribe(data => this.onValueChanged(data));
-
-        this.onValueChanged(); // (re)set validation messages now
-
-    }
-
-
-
-    onValueChanged(data?: any) {
-        console.log("onvaluechanged");
-        if (!this.signUpForm) { return; }
-        const form = this.signUpForm;
-
-        for (const field in this.formErrors) {
-            // clear previous error message (if any)
-            this.formErrors[field] = '';
-            const control = form.get(field);
-
-            if (control && control.dirty && !control.valid) {
-                const messages = this.validationMessages[field];
-                for (const key in control.errors) {
-                    this.formErrors[field] += messages[key] + ' ';
-                }
-            }
-        }
     }
 
     register() {
         this.loading = true;
-        // console.log("this.model is : " + this.model);
-        this.userService.create(this.model)
+        console.log("this.signUpForm.value is : " + JSON.stringify(JSON.stringify(this.signUpForm.value)));
+        console.log("this.model is : " + JSON.stringify(JSON.stringify(this.model)));
+        this.userService.create(this.signUpForm.value)
             .subscribe(
                 data => {
                     this.alertService.success('Registration successful', true);
+                    console.log("saved successfully!");
                     this.router.navigate(['/login']);
                 },
                 error => {
                     this.alertService.error(error);
                     this.loading = false;
+                    console.log("didn't save successfully: " + error.toString());
                 });
     }
 
 
-    formErrors = {
-        'firstName': 'Enter a first name',
-        'email': 'Email is taken'
-    };
-
-    validationMessages = {
-        'firstName': {
-            'required':      'Name is required.',
-            'minlength':     'Name must be at least 4 characters long.',
-            'maxlength':     'Name cannot be more than 24 characters long.',
-            'forbiddenName': 'Someone named "Bob" cannot be a hero.'
-        },
-        'email': {
-            'required': 'Power is required.'
-        }
-    };
+    // formErrors = {
+    //     'firstName': 'Enter a first name',
+    //     'email': 'Email is taken'
+    // };
+    //
+    // validationMessages = {
+    //     'firstName': {
+    //         'required':      'Name is required.',
+    //         'minlength':     'Name must be at least 4 characters long.',
+    //         'maxlength':     'Name cannot be more than 24 characters long.',
+    //         'forbiddenName': 'Someone named "Bob" cannot be a hero.'
+    //     },
+    //     'email': {
+    //         'required': 'Power is required.'
+    //     }
+    // };
 }

@@ -22,7 +22,8 @@ import {AdminLayoutComponent} from "./admin/admin-layout.component";
 import {SidebarModule} from "./sidebar/sidebar.module";
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {FooterComponent} from "./shared/footer/footer.component";
-import AsyncValidator from "./register/registration-async.validator";
+import RegistrationEmailValidator from "./register/registration-email-async.validator";
+import RegistrationLoginValidator from "./register/registration-login-async.validator";
 
 
 @NgModule({
@@ -33,7 +34,7 @@ import AsyncValidator from "./register/registration-async.validator";
         routing,
         MyMaterialModule,
         SidebarModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
 
 ],
     declarations: [
@@ -45,7 +46,8 @@ import AsyncValidator from "./register/registration-async.validator";
         AdminLayoutComponent,
         NavbarComponent,
         FooterComponent,
-        AsyncValidator
+        RegistrationLoginValidator,
+        RegistrationEmailValidator
     ],
     providers: [
         AuthGuard,

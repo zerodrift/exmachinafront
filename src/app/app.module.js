@@ -27,7 +27,8 @@ var admin_layout_component_1 = require("./admin/admin-layout.component");
 var sidebar_module_1 = require("./sidebar/sidebar.module");
 var navbar_component_1 = require("./shared/navbar/navbar.component");
 var footer_component_1 = require("./shared/footer/footer.component");
-var registration_async_validator_1 = require("./register/registration-async.validator");
+var registration_email_async_validator_1 = require("./register/registration-email-async.validator");
+var registration_login_async_validator_1 = require("./register/registration-login-async.validator");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -42,7 +43,7 @@ AppModule = __decorate([
             app_routing_1.routing,
             material_module_1.MyMaterialModule,
             sidebar_module_1.SidebarModule,
-            forms_1.ReactiveFormsModule
+            forms_1.ReactiveFormsModule,
         ],
         declarations: [
             app_component_1.AppComponent,
@@ -53,7 +54,8 @@ AppModule = __decorate([
             admin_layout_component_1.AdminLayoutComponent,
             navbar_component_1.NavbarComponent,
             footer_component_1.FooterComponent,
-            registration_async_validator_1.default
+            registration_login_async_validator_1.default,
+            registration_email_async_validator_1.default
         ],
         providers: [
             index_2.AuthGuard,

@@ -18,18 +18,22 @@ export class UserService {
         return this.http.get(this.host + '/api/users/' + id, this.jwt()).map((response: Response) => response.json());
     }
 
-    getUser(login:string) {
+    getUserByLogin(login:string) {
         return this.http.get(AppSettings.FETCH_USER_LOGIN_ENDPOINT + login).map( response => response.json());
+    }
+
+    getUserByEmail(email:string) {
+        return this.http.get(AppSettings.FETCH_USER_EMAIL_ENDPOINT + email).map( response => response.json());
     }
 
     create(user: User) {
         return this.http.post(this.host + '/api/users', {
             "id":0,
             "login":user.login,
-        "password":user.password,
-        "firstname": user.firstname,
-        "lastname": user.lastname,
-        "email": user.email}, this.jwt()).map((response: Response) => response.json());
+            "password":user.password,
+            "firstname": user.firstname,
+            "lastname": user.lastname,
+            "email": user.email}, this.jwt()).map((response: Response) => response.json());
     }
 
     update(user: User) {
